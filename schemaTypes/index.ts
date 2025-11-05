@@ -1,22 +1,24 @@
-import blockContent from './blockContent'
-import crewMember from './crewMember'
-import castMember from './castMember'
-import movie from './movie'
-import person from './person'
-import screening from './screening'
-import plotSummary from './plotSummary'
-import plotSummaries from './plotSummaries'
-
+import page from './page'
+import reusablePageBlock from './reusablePageBlock'
+import hero from './hero'
+import video from './video'
+import carousel from './carousel'
+import textBlock from './textBlock'
+import imageBlock from './imageBlock'
+import ctaBlock from './ctaBlock'
+import featuresGrid from './featuresGrid'
+import multiObjectBlock from './multiObjectBlock'
 export const schemaTypes = [
   // Document types
-  movie,
-  person,
-  screening,
-
-  // Other types
-  blockContent,
-  plotSummary,
-  plotSummaries,
-  castMember,
-  crewMember,
+  page,
+  reusablePageBlock,
+  hero,
+  video,
+  carousel,
+  // Object types
+  textBlock,
+  imageBlock,
+  ctaBlock,
+  featuresGrid,
+  multiObjectBlock,
 ]

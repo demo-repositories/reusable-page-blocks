@@ -1,10 +1,43 @@
-# Sanity Movies Content Studio
+# Reusable Page Blocks
 
-Congratulations, you have now installed the Sanity Content Studio, an open-source real-time content editing environment connected to the Sanity backend.
+A Sanity Studio demonstration showcasing a flexible page builder system with reusable content blocks.
 
-Now you can do the following things:
+## What This Demonstrates
 
-- [Read “getting started” in the docs](https://www.sanity.io/docs/introduction/getting-started?utm_source=readme)
-- Check out one of the example frontends: [React](https://github.com/sanity-io/example-frontend-next-js) | [React Native](https://github.com/sanity-io/example-app-react-native) | [Vue](https://github.com/sanity-io/example-frontend-vue-js) | [PHP](https://github.com/sanity-io/example-frontend-silex-twig)
-- [Join the Sanity community](https://www.sanity.io/community/join?utm_source=readme)
-- [Extend and build plugins](https://www.sanity.io/docs/content-studio/extending?utm_source=readme)
+This project shows how to build a modular content management system using Sanity Studio with:
+
+- **Page Builder**: Compose pages using drag-and-drop content blocks
+- **Reusable Blocks**: Create reusable content components (Hero, Video, Carousel) that can be referenced across multiple pages
+- **Content Types**: Pre-built block types including text, images, CTAs, and feature grids
+- **Document Components**: Structured content types for heroes, videos, and carousels
+
+## Installation
+
+1. Install dependencies using pnpm:
+
+```bash
+pnpm install
+```
+
+2. Copy the `.env.example` file to `.env` and add your Sanity project credentials:
+
+```bash
+cp .env.example .env
+```
+
+Then update the values in `.env` with your Sanity project ID and dataset.
+
+## Running the Studio
+
+Start the development server:
+
+```bash
+pnpm run dev
+```
+
+The Sanity Studio will be available at `http://localhost:3333`
+
+## Other Commands
+
+- `pnpm run build` - Build the studio for production
+- `pnpm run deploy` - Deploy the studio to Sanity's hosting
