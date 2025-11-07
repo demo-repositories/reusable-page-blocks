@@ -1,4 +1,5 @@
 import {defineType} from 'sanity'
+import { blockCopy } from './blockCopy'
 
 export default defineType({
   name: 'ctaBlock',
@@ -6,8 +7,8 @@ export default defineType({
   type: 'object',
   fields: [
     {
-      name: 'heading',
-      title: 'Heading',
+      name: 'title',
+      title: 'Title',
       type: 'string',
       validation: Rule => Rule.required()
     },
@@ -48,11 +49,12 @@ export default defineType({
           {title: 'Green', value: 'green'}
         ]
       }
-    }
+    },
+    blockCopy,
   ],
   preview: {
     select: {
-      title: 'heading'
+      title: 'title'
     },
     prepare(selection) {
       return {

@@ -1,10 +1,17 @@
 import {defineType} from 'sanity'
+import { blockCopy } from './blockCopy'
 
 export default defineType({
   name: 'imageBlock',
   title: 'Image Block',
   type: 'object',
   fields: [
+    {
+      name: 'title',
+      title: 'Title',
+      type: 'string',
+      validation: Rule => Rule.required()
+    },
     {
       name: 'image',
       title: 'Image',
@@ -24,11 +31,12 @@ export default defineType({
       name: 'caption',
       title: 'Caption',
       type: 'string'
-    }
+    },
+    blockCopy,
   ],
   preview: {
     select: {
-      title: 'alt',
+      title: 'title',
       media: 'image'
     },
     prepare(selection) {

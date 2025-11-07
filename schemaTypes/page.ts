@@ -23,8 +23,8 @@ export default defineType({
       validation: Rule => Rule.required()
     },
     {
-      name: 'pageBuilder',
-      title: 'Page Builder',
+      name: 'content',
+      title: 'Content',
       type: 'array',
       of: [
         {type: 'textBlock'},
@@ -32,11 +32,10 @@ export default defineType({
         {type: 'ctaBlock'},
         {type: 'featuresGrid'},
         {type: 'multiObjectBlock'},
-        // this references the reusable page block document type
+        // Document references (reusable by nature)
         {
           type: 'reference',
-          to: [{type: 'reusablePageBlock'}],
-          title: 'Reusable Page Block',
+          to: [{type: 'hero'}, {type: 'video'}, {type: 'carousel'}, {type: 'reusablePageBlock'}],
           icon: IoExtensionPuzzle
         }
       ]

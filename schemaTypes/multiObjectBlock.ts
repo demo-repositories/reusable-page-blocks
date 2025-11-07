@@ -1,10 +1,16 @@
 import {defineType} from 'sanity'
+import { blockCopy } from './blockCopy'
 
 export default defineType({
   name: 'multiObjectBlock',
   title: 'Multi Object Block',
   type: 'object',
   fields: [
+    {
+      name: 'title',
+      title: 'Title',
+      type: 'string'
+    },
     {
       name: 'objects',
       title: 'Objects',
@@ -96,17 +102,19 @@ export default defineType({
           {title: 'Green', value: 'green'}
         ]
       }
-    }
+    },
+    blockCopy,
   ],
   preview: {
     select: {
+      title: 'title',
       objects: 'objects',
       backgroundColor: 'backgroundColor'
     },
     prepare(selection) {
       const count = selection.objects ? selection.objects.length : 0
       return {
-        title: 'Multi Object Block',
+        title: selection.title || 'Multi Object Block',
         subtitle: `${count} object${count !== 1 ? 's' : ''}${selection.backgroundColor ? ` • ${selection.backgroundColor}` : ''}`
       }
     }

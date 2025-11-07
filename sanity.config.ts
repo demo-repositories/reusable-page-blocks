@@ -11,9 +11,9 @@ export default defineConfig({
 
   projectId: process.env.SANITY_STUDIO_PROJECT_ID!,
   dataset: process.env.SANITY_STUDIO_DATASET!,
-  mediaLibrary: {
-    enabled: true,
-  },
+  // mediaLibrary: {
+  //   enabled: true,
+  // },
   plugins: [
     structureTool({
       structure: (S) =>

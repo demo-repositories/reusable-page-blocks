@@ -15,13 +15,18 @@
     "sanity"
   ],
   "dependencies": {
-    "@sanity/vision": "^4.13.0",
+    "@portabletext/block-tools": "^4.0.0",
+    "@portabletext/toolkit": "^4.0.0",
+    "@sanity/icons": "^3.7.4",
+    "@sanity/ui": "^3.1.11",
+    "@sanity/vision": "^4.14.1",
     "react": "^19.1",
     "react-dom": "^19.1",
     "react-icons": "^5.5.0",
-    "sanity": "^4.13.0",
+    "sanity": "^4.14.1",
     "sanity-plugin-media": "^4.0.0",
-    "styled-components": "^6.1.18"
+    "styled-components": "^6.1.18",
+    "swr": "^2.3.6"
   },
   "devDependencies": {
     "@sanity/eslint-config-studio": "^5.0.2",
