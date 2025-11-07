@@ -7,7 +7,7 @@ import {IoExtensionPuzzle} from 'react-icons/io5'
 
 export default defineConfig({
   name: 'default',
-  title: 'resuable-page-blocks',
+  title: 'reusable-page-blocks',
 
   projectId: process.env.SANITY_STUDIO_PROJECT_ID!,
   dataset: process.env.SANITY_STUDIO_DATASET!,
