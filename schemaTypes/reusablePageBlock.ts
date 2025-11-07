@@ -21,7 +21,7 @@
 import { BiSolidExtension } from "react-icons/bi"
 import { SanityClient, defineField, defineType, useClient } from "sanity"
 import useSWR from "swr"
-import { PageBlockPreview } from "../Components/PageBlockPreview"
+import { PageBlockPreview } from "../components/PageBlockPreview"
 import { pluralize } from "../utils/pluralize"
 import { sortByType } from "../utils/sortByType"
 

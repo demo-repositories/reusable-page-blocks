@@ -17,7 +17,7 @@ This project shows how to build a modular content management system using Sanity
 
 ### Block Copy Component
 
-The `BlockCopy` component (`/Components/BlockCopy.tsx`) provides a "Make Reusable" button within the Studio that allows editors to:
+The `BlockCopy` component (`/components/BlockCopy.tsx`) provides a "Make Reusable" button within the Studio that allows editors to:
 
 1. **Transform regular blocks into reusable blocks** - Click the button to convert any page block into a standalone reusable block document
 2. **Automatic replacement** - The original block is replaced with a reference to the new reusable block
@@ -70,7 +70,7 @@ The Sanity Studio will be available at `http://localhost:3333`
 ## Project Structure
 
 ```
-/Components
+/components
   └── BlockCopy.tsx          # Custom component for transforming blocks
 /schemaTypes
   ├── reusablePageBlock.ts   # Schema for reusable block documents
@@ -90,7 +90,7 @@ To add the BlockCopy component to your own fields:
 
 1. Import the component in your schema:
    ```typescript
-   import { BlockCopy } from '../Components/BlockCopy'
+   import { BlockCopy } from '../components/BlockCopy'
    ```
 
 2. Add it to your field's `components` definition:

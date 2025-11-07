@@ -1,5 +1,5 @@
 import { defineField } from "sanity"
-import { BlockCopy } from "../Components/BlockCopy"
+import { BlockCopy } from "../components/BlockCopy"
 
 export const blockCopy = defineField({
   name: "internalPageBlockCopy",
