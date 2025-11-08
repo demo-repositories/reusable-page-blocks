@@ -19,7 +19,7 @@
  */
 
 import {BiSolidExtension} from 'react-icons/bi'
-import {SanityClient, defineType, useClient} from 'sanity'
+import {type SanityClient, defineType, useClient} from 'sanity'
 import useSWR from 'swr'
 import {PageBlockPreview} from '../components/PageBlockPreview'
 import {pluralize} from '../utils/pluralize'

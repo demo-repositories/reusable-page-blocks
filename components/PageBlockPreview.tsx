@@ -1,5 +1,5 @@
 import {Box, Flex, Badge} from '@sanity/ui'
-import {PreviewProps} from 'sanity'
+import type {PreviewProps} from 'sanity'
 
 interface Props extends PreviewProps {
   _key: string
