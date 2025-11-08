@@ -9,13 +9,13 @@ export default defineType({
       name: 'name',
       title: 'Name',
       type: 'string',
-      validation: (Rule) => Rule.required(),
+      validation: (rule) => rule.required(),
     },
     {
       name: 'headline',
       title: 'Headline',
       type: 'string',
-      validation: (Rule) => Rule.required(),
+      validation: (rule) => rule.required(),
     },
     {
       name: 'subheadline',

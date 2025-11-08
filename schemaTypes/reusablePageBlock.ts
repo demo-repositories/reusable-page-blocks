@@ -34,7 +34,7 @@ export default defineType({
       name: 'title',
       type: 'string',
       description: 'Name only used in the studio to identify this reusable page block',
-      validation: (Rule) => Rule.required(),
+      validation: (rule) => rule.required(),
     },
     {
       // The actual content - an array that holds exactly ONE block
@@ -42,7 +42,7 @@ export default defineType({
       // Why min(1).max(1)? We only want to store one block per reusable document
       name: 'content',
       type: 'array',
-      validation: (Rule) => Rule.required().min(1).max(1),
+      validation: (rule) => rule.required().min(1).max(1),
       of: [
         // List of all block types that can be made reusable
         {type: 'textBlock'},

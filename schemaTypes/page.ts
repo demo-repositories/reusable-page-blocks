@@ -10,7 +10,7 @@ export default defineType({
       name: 'title',
       title: 'Title',
       type: 'string',
-      validation: (Rule) => Rule.required(),
+      validation: (rule) => rule.required(),
     },
     {
       name: 'slug',
@@ -20,7 +20,7 @@ export default defineType({
         source: 'title',
         maxLength: 96,
       },
-      validation: (Rule) => Rule.required(),
+      validation: (rule) => rule.required(),
     },
     {
       name: 'content',
