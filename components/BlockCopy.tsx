@@ -1,18 +1,18 @@
 // Converts PortableText blocks to plain text strings
-import { toPlainText } from "@portabletext/toolkit"
+import {toPlainText} from '@portabletext/toolkit'
 // Icon for the transform button
-import { TransferIcon } from "@sanity/icons"
+import {TransferIcon} from '@sanity/icons'
 // UI components from Sanity's design system
-import { Card, Box, Flex, Button, Text, useToast } from "@sanity/ui"
-import { useMemo, useState } from "react"
+import {Card, Box, Flex, Button, Text, useToast} from '@sanity/ui'
+import {useMemo, useState} from 'react'
 import {
   type PortableTextBlock,
   type FieldProps, // Props passed to custom field components
   type ObjectItem, // Base type for array items in Sanity
   useClient, // Hook to access Sanity API client
   useFormValue, // Hook to read form values from the current document
-} from "sanity"
-import reusablePageBlock from "../schemaTypes/reusablePageBlock"
+} from 'sanity'
+import reusablePageBlock from '../schemaTypes/reusablePageBlock'
 
 // Get the schema name for reusable blocks
 const REUSABLE_BLOCK_TYPE = reusablePageBlock.name
@@ -39,22 +39,22 @@ export function BlockCopy(field: FieldProps) {
 
   // Extract the unique _key identifier from the field path
   // This identifies which block in the content array we're working with
-  const { _key } = field.path[1] as { _key: string }
+  const {_key} = field.path[1] as {_key: string}
 
   // Get current document ID (so we can update it later)
-  const currentId = useFormValue(["_id"]) as string | undefined
+  const currentId = useFormValue(['_id']) as string | undefined
 
   // Get current document type (to check if we're already in a reusable block)
-  const currentType = useFormValue(["_type"]) as string | undefined
+  const currentType = useFormValue(['_type']) as string | undefined
 
   // Get all blocks from the content array
-  const allBlocks = useFormValue(["content"]) as BlockItem[]
+  const allBlocks = useFormValue(['content']) as BlockItem[]
 
   // Find the index of the current block in the array
   // useMemo prevents recalculation on every render
   const thisBlockIndex = useMemo(
     () => allBlocks.findIndex((block) => block._key === _key),
-    [allBlocks, _key]
+    [allBlocks, _key],
   )
 
   // If we're already editing a reusable block, show an info message
@@ -82,7 +82,7 @@ export function BlockCopy(field: FieldProps) {
 
     // Extract the title - could be a plain string or PortableText array
     const blockTitle =
-      typeof blockData?.title === "string"
+      typeof blockData?.title === 'string'
         ? blockData?.title
         : toPlainText(blockData?.title as unknown as PortableTextBlock[])
 
@@ -95,14 +95,14 @@ export function BlockCopy(field: FieldProps) {
       const res = await client.create({
         _type: REUSABLE_BLOCK_TYPE,
         title: blockTitle,
-        content: [{ ...blockData }],
+        content: [{...blockData}],
       })
 
       // Step 2: Create a reference object to replace the original block
       // IMPORTANT: We preserve the original _key to maintain Sanity's tracking
       // If we generate a new _key, Sanity won't know which block to replace
       const reference = {
-        _type: "reference",
+        _type: 'reference',
         _ref: res._id, // Points to the newly created reusable block
         _key: _key, // Preserve the original _key so Sanity can track the replacement
       }
@@ -114,19 +114,19 @@ export function BlockCopy(field: FieldProps) {
       })
 
       // Step 4: Update the parent document with the new content array
-      client.patch(currentId).set({ content: newBlocks }).commit()
+      client.patch(currentId).set({content: newBlocks}).commit()
 
       // Show success notification to user
       toast.push({
-        status: "success",
-        title: "Block transformed",
-        description: "Block has been transformed to a reusable block",
+        status: 'success',
+        title: 'Block transformed',
+        description: 'Block has been transformed to a reusable block',
       })
     } catch (err) {
       // Show error notification if anything goes wrong
       toast.push({
-        status: "error",
-        title: "Block could not be transformed",
+        status: 'error',
+        title: 'Block could not be transformed',
         description: err.message,
       })
     } finally {
@@ -151,7 +151,7 @@ export function BlockCopy(field: FieldProps) {
           </Flex>
 
           {field.description && (
-            <Text size={1} muted style={{ marginTop: "0.5rem" }}>
+            <Text size={1} muted style={{marginTop: '0.5rem'}}>
               {field.description}
             </Text>
           )}

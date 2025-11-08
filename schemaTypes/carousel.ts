@@ -9,12 +9,12 @@ export default defineType({
       name: 'name',
       title: 'Name',
       type: 'string',
-      validation: Rule => Rule.required()
+      validation: (Rule) => Rule.required(),
     },
     {
       name: 'title',
       title: 'Carousel Title',
-      type: 'string'
+      type: 'string',
     },
     {
       name: 'slides',
@@ -29,50 +29,50 @@ export default defineType({
               title: 'Image',
               type: 'image',
               options: {
-                hotspot: true
+                hotspot: true,
               },
-              validation: Rule => Rule.required()
+              validation: (Rule) => Rule.required(),
             },
             {
               name: 'caption',
               title: 'Caption',
-              type: 'string'
+              type: 'string',
             },
             {
               name: 'link',
               title: 'Link',
-              type: 'url'
-            }
+              type: 'url',
+            },
           ],
           preview: {
             select: {
               title: 'caption',
-              media: 'image'
-            }
-          }
-        }
+              media: 'image',
+            },
+          },
+        },
       ],
-      validation: Rule => Rule.required().min(1)
+      validation: (Rule) => Rule.required().min(1),
     },
     {
       name: 'autoplay',
       title: 'Autoplay',
       type: 'boolean',
-      initialValue: false
+      initialValue: false,
     },
     {
       name: 'autoplaySpeed',
       title: 'Autoplay Speed (seconds)',
       type: 'number',
       hidden: ({parent}) => !parent?.autoplay,
-      initialValue: 5
-    }
+      initialValue: 5,
+    },
   ],
   preview: {
     select: {
       title: 'name',
       subtitle: 'title',
-      media: 'slides.0.image'
-    }
-  }
+      media: 'slides.0.image',
+    },
+  },
 })

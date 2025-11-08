@@ -9,46 +9,46 @@ export default defineType({
       name: 'name',
       title: 'Name',
       type: 'string',
-      validation: Rule => Rule.required()
+      validation: (Rule) => Rule.required(),
     },
     {
       name: 'title',
       title: 'Video Title',
-      type: 'string'
+      type: 'string',
     },
     {
       name: 'videoUrl',
       title: 'Video URL',
       type: 'url',
       description: 'YouTube, Vimeo, or direct video URL',
-      validation: Rule => Rule.required()
+      validation: (Rule) => Rule.required(),
     },
     {
       name: 'thumbnail',
       title: 'Thumbnail Image',
       type: 'image',
       options: {
-        hotspot: true
-      }
+        hotspot: true,
+      },
     },
     {
       name: 'autoplay',
       title: 'Autoplay',
       type: 'boolean',
-      initialValue: false
+      initialValue: false,
     },
     {
       name: 'loop',
       title: 'Loop Video',
       type: 'boolean',
-      initialValue: false
-    }
+      initialValue: false,
+    },
   ],
   preview: {
     select: {
       title: 'name',
       subtitle: 'title',
-      media: 'thumbnail'
-    }
-  }
+      media: 'thumbnail',
+    },
+  },
 })

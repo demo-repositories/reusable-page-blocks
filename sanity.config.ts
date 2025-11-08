@@ -28,10 +28,7 @@ export default defineConfig({
             S.listItem()
               .title('Reusable Page Blocks')
               .icon(IoExtensionPuzzle)
-              .child(
-                S.documentTypeList('reusablePageBlock')
-                  .title('Reusable Page Blocks')
-              ),
+              .child(S.documentTypeList('reusablePageBlock').title('Reusable Page Blocks')),
             S.divider(),
             S.listItem()
               .title('Document Components')
@@ -51,7 +48,7 @@ export default defineConfig({
                       .title('Carousel')
                       .schemaType('carousel')
                       .child(S.documentTypeList('carousel').title('Carousels')),
-                  ])
+                  ]),
               ),
           ]),
     }),

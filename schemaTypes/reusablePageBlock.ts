@@ -18,64 +18,63 @@
  * Page B can also reference the same reusablePageBlock
  */
 
-import { BiSolidExtension } from "react-icons/bi"
-import { SanityClient, defineField, defineType, useClient } from "sanity"
-import useSWR from "swr"
-import { PageBlockPreview } from "../components/PageBlockPreview"
-import { pluralize } from "../utils/pluralize"
-import { sortByType } from "../utils/sortByType"
+import {BiSolidExtension} from 'react-icons/bi'
+import {SanityClient, defineType, useClient} from 'sanity'
+import useSWR from 'swr'
+import {PageBlockPreview} from '../components/PageBlockPreview'
+import {pluralize} from '../utils/pluralize'
+import {sortByType} from '../utils/sortByType'
 
 export default defineType({
-  name: "reusablePageBlock",
-  type: "document", // This is a document type, not an object, so it can be referenced
+  name: 'reusablePageBlock',
+  type: 'document', // This is a document type, not an object, so it can be referenced
   fields: [
     {
       // Internal name used in the Studio to identify this reusable block
-      name: "title",
-      type: "string",
-      description:
-        "Name only used in the studio to identify this reusable page block",
+      name: 'title',
+      type: 'string',
+      description: 'Name only used in the studio to identify this reusable page block',
       validation: (Rule) => Rule.required(),
     },
     {
       // The actual content - an array that holds exactly ONE block
       // Why an array? Sanity requires arrays to hold different types
       // Why min(1).max(1)? We only want to store one block per reusable document
-      name: "content",
-      type: "array",
+      name: 'content',
+      type: 'array',
       validation: (Rule) => Rule.required().min(1).max(1),
       of: [
         // List of all block types that can be made reusable
-        { type: "textBlock" },
-        { type: "imageBlock" },
-        { type: "ctaBlock" },
-        { type: "featuresGrid" },
-        { type: "multiObjectBlock" },
+        {type: 'textBlock'},
+        {type: 'imageBlock'},
+        {type: 'ctaBlock'},
+        {type: 'featuresGrid'},
+        {type: 'multiObjectBlock'},
       ]
         .sort(sortByType) // Sort alphabetically by type name for better UX
         .map((block) => ({
           ...block,
           // Use custom preview component for each block
-          components: { preview: PageBlockPreview },
+          components: {preview: PageBlockPreview},
         })),
     },
   ],
   // Default preview configuration for document lists
   preview: {
     select: {
-      title: "title", // Show the title field
-      _type: "content.0._type", // Get the type of the first (and only) content item
+      title: 'title', // Show the title field
+      _type: 'content.0._type', // Get the type of the first (and only) content item
     },
-    prepare({ title, _type }: { title?: string; _type?: string }) {
+    prepare({title, _type}: {title?: string; _type?: string}) {
       // Format the block type name for display
       // e.g., "textBlock" → "text Block" → "Text Block"
       const type = _type
-        ?.replace("PageBlock", "")
-        .replace(/([A-Z])/g, " $1") // Add space before capital letters
+        ?.replace('PageBlock', '')
+        .replace(/([A-Z])/g, ' $1') // Add space before capital letters
         .replace(/^(\w)/, (match) => match.toUpperCase()) // Capitalize first letter
 
       // Build subtitle showing what type of block this is
-      let subtitle = "Reusable Page Block (empty)"
+      let subtitle = 'Reusable Page Block (empty)'
       if (type) subtitle = `Reusable ${type}`
 
       return {
@@ -96,12 +95,12 @@ export default defineType({
 
       // Append usage count to subtitle
       // e.g., "Reusable Text Block (used in 3 pages)"
-      if (typeof count === "number") {
-        const noun = pluralize(count, "page", "pages")
+      if (typeof count === 'number') {
+        const noun = pluralize(count, 'page', 'pages')
         subtitle += ` (used in ${count} ${noun})`
       }
 
-      return props.renderDefault({ ...props, subtitle })
+      return props.renderDefault({...props, subtitle})
     },
   },
 })
@@ -115,13 +114,13 @@ export default defineType({
  */
 function useReferences(client: SanityClient, _id?: string) {
   // Remove "drafts." prefix if present (Sanity adds this to unpublished docs)
-  _id = _id?.replace("drafts.", "")
+  _id = _id?.replace('drafts.', '')
 
   // Use SWR for caching and automatic revalidation
-  const { data } = useSWR<any[]>(_id, (id) => {
+  const {data} = useSWR<any[]>(_id, (id) => {
     if (!id) return []
     // GROQ query: Find all documents that reference this ID
-    return client.fetch("*[references($id)]", { id })
+    return client.fetch('*[references($id)]', {id})
   })
 
   return data
