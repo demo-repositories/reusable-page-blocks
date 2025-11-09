@@ -1,10 +1,12 @@
 import {defineType} from 'sanity'
-import {blockCopy} from './blockCopy'
 
 export default defineType({
   name: 'imageBlock',
   title: 'Image Block',
   type: 'object',
+  options: {
+    reusable: true,
+  },
   fields: [
     {
       name: 'title',
@@ -32,7 +34,6 @@ export default defineType({
       title: 'Caption',
       type: 'string',
     },
-    blockCopy,
   ],
   preview: {
     select: {

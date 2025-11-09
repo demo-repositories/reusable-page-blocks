@@ -19,7 +19,7 @@
  */
 
 import {BiSolidExtension} from 'react-icons/bi'
-import {type SanityClient, defineType, useClient} from 'sanity'
+import {DEFAULT_STUDIO_CLIENT_OPTIONS, type SanityClient, defineType, useClient} from 'sanity'
 import useSWR from 'swr'
 import {PageBlockPreview} from '../components/PageBlockPreview'
 import {pluralize} from '../utils/pluralize'
@@ -88,7 +88,7 @@ export default defineType({
   components: {
     preview: function Preview(props) {
       const id = (props as any)?._id
-      const client = useClient()
+      const client = useClient(DEFAULT_STUDIO_CLIENT_OPTIONS)
       // Fetch count of pages that reference this block
       const count = useReferences(client, id)?.length
       let subtitle = props.subtitle
