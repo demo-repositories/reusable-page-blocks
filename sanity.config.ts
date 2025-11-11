@@ -4,6 +4,8 @@ import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
 import {media} from 'sanity-plugin-media'
 import {structure} from './structure'
+import {ReusableBlockInput} from './components/ReusableBlockInput'
+import {reusableBlocksUsEnglishLocaleBundle} from './i18n'
 
 export default defineConfig({
   name: 'default',
@@ -22,6 +24,16 @@ export default defineConfig({
 
   schema: {
     types: schemaTypes,
+  },
+
+  i18n: {
+    bundles: [reusableBlocksUsEnglishLocaleBundle],
+  },
+
+  form: {
+    components: {
+      input: ReusableBlockInput,
+    },
   },
 
   beta: {

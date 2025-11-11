@@ -1,10 +1,12 @@
 import {defineType} from 'sanity'
-import {blockCopy} from './blockCopy'
 
 export default defineType({
   name: 'ctaBlock',
   title: 'Call to Action Block',
   type: 'object',
+  options: {
+    reusable: true,
+  },
   fields: [
     {
       name: 'title',
@@ -50,7 +52,6 @@ export default defineType({
         ],
       },
     },
-    blockCopy,
   ],
   preview: {
     select: {

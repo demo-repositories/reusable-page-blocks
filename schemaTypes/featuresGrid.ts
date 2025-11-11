@@ -1,10 +1,12 @@
 import {defineType} from 'sanity'
-import {blockCopy} from './blockCopy'
 
 export default defineType({
   name: 'featuresGrid',
   title: 'Features Grid',
   type: 'object',
+  options: {
+    reusable: true,
+  },
   fields: [
     {
       name: 'title',
@@ -40,7 +42,6 @@ export default defineType({
         },
       ],
     },
-    blockCopy,
   ],
   preview: {
     select: {
