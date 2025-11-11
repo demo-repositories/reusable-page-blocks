@@ -34,7 +34,7 @@ export default defineType({
       name: 'title',
       type: 'string',
       description: 'Name only used in the studio to identify this reusable page block',
-      validation: (Rule) => Rule.required(),
+      validation: (rule) => rule.required(),
     },
     {
       // The actual content - an array that holds exactly ONE block

@@ -9,7 +9,7 @@ export default defineType({
       name: 'name',
       title: 'Name',
       type: 'string',
-      validation: (Rule) => Rule.required(),
+      validation: (rule) => rule.required(),
     },
     {
       name: 'title',
@@ -31,7 +31,7 @@ export default defineType({
               options: {
                 hotspot: true,
               },
-              validation: (Rule) => Rule.required(),
+              validation: (rule) => rule.required(),
             },
             {
               name: 'caption',

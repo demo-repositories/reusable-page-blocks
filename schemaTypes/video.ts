@@ -9,7 +9,7 @@ export default defineType({
       name: 'name',
       title: 'Name',
       type: 'string',
-      validation: (Rule) => Rule.required(),
+      validation: (rule) => rule.required(),
     },
     {
       name: 'title',
@@ -21,7 +21,7 @@ export default defineType({
       title: 'Video URL',
       type: 'url',
       description: 'YouTube, Vimeo, or direct video URL',
-      validation: (Rule) => Rule.required(),
+      validation: (rule) => rule.required(),
     },
     {
       name: 'thumbnail',

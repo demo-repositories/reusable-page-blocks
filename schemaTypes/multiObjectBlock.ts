@@ -31,13 +31,13 @@ export default defineType({
               options: {
                 hotspot: true,
               },
-              validation: (Rule) => Rule.required(),
+              validation: (rule) => rule.required(),
             },
             {
               name: 'alt',
               title: 'Alt Text',
               type: 'string',
-              validation: (Rule) => Rule.required(),
+              validation: (rule) => rule.required(),
             },
             {
               name: 'caption',
