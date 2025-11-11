@@ -1,5 +1,5 @@
 import {defineType} from 'sanity'
-import { blockCopy } from './blockCopy'
+import {blockCopy} from './blockCopy'
 
 export default defineType({
   name: 'multiObjectBlock',
@@ -9,7 +9,7 @@ export default defineType({
     {
       name: 'title',
       title: 'Title',
-      type: 'string'
+      type: 'string',
     },
     {
       name: 'objects',
@@ -22,33 +22,33 @@ export default defineType({
             {
               name: 'title',
               title: 'Title',
-              type: 'string'
+              type: 'string',
             },
             {
               name: 'image',
               title: 'Image',
               type: 'image',
               options: {
-                hotspot: true
+                hotspot: true,
               },
-              validation: Rule => Rule.required()
+              validation: (Rule) => Rule.required(),
             },
             {
               name: 'alt',
               title: 'Alt Text',
               type: 'string',
-              validation: Rule => Rule.required()
+              validation: (Rule) => Rule.required(),
             },
             {
               name: 'caption',
               title: 'Caption',
-              type: 'string'
+              type: 'string',
             },
             {
               name: 'description',
               title: 'Description',
               type: 'text',
-              rows: 3
+              rows: 3,
             },
             {
               name: 'links',
@@ -61,34 +61,34 @@ export default defineType({
                     {
                       name: 'text',
                       title: 'Link Text',
-                      type: 'string'
+                      type: 'string',
                     },
                     {
                       name: 'url',
                       title: 'URL',
-                      type: 'url'
-                    }
-                  ]
-                }
-              ]
-            }
+                      type: 'url',
+                    },
+                  ],
+                },
+              ],
+            },
           ],
           preview: {
             select: {
               title: 'title',
               alt: 'alt',
-              media: 'image'
+              media: 'image',
             },
             prepare(selection) {
               return {
                 title: selection.title || selection.alt || 'Untitled',
                 subtitle: selection.alt ? `Alt: ${selection.alt}` : undefined,
-                media: selection.media
+                media: selection.media,
               }
-            }
-          }
-        }
-      ]
+            },
+          },
+        },
+      ],
     },
     {
       name: 'backgroundColor',
@@ -99,9 +99,9 @@ export default defineType({
           {title: 'White', value: 'white'},
           {title: 'Gray', value: 'gray'},
           {title: 'Blue', value: 'blue'},
-          {title: 'Green', value: 'green'}
-        ]
-      }
+          {title: 'Green', value: 'green'},
+        ],
+      },
     },
     blockCopy,
   ],
@@ -109,14 +109,14 @@ export default defineType({
     select: {
       title: 'title',
       objects: 'objects',
-      backgroundColor: 'backgroundColor'
+      backgroundColor: 'backgroundColor',
     },
     prepare(selection) {
       const count = selection.objects ? selection.objects.length : 0
       return {
         title: selection.title || 'Multi Object Block',
-        subtitle: `${count} object${count !== 1 ? 's' : ''}${selection.backgroundColor ? ` • ${selection.backgroundColor}` : ''}`
+        subtitle: `${count} object${count !== 1 ? 's' : ''}${selection.backgroundColor ? ` • ${selection.backgroundColor}` : ''}`,
       }
-    }
-  }
+    },
+  },
 })

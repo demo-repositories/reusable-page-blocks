@@ -25,6 +25,7 @@ The `BlockCopy` component (`/components/BlockCopy.tsx`) provides a "Make Reusabl
 4. **Error handling** - Provides user feedback via toast notifications for success and error states
 
 This pattern is useful when you want to:
+
 - Create reusable content from existing blocks
 - Maintain consistency across multiple pages
 - Update content in one place and see changes everywhere it's referenced
@@ -89,11 +90,13 @@ sanity.config.ts             # Sanity Studio configuration
 To add the BlockCopy component to your own fields:
 
 1. Import the component in your schema:
+
    ```typescript
-   import { BlockCopy } from '../components/BlockCopy'
+   import {BlockCopy} from '../components/BlockCopy'
    ```
 
 2. Add it to your field's `components` definition:
+
    ```typescript
    {
      name: 'content',

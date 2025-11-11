@@ -3,13 +3,17 @@ import {defineCliConfig} from 'sanity/cli'
 export default defineCliConfig({
   api: {
     projectId: process.env.SANITY_STUDIO_PROJECT_ID!,
-    dataset: process.env.SANITY_STUDIO_DATASET!
+    dataset: process.env.SANITY_STUDIO_DATASET!,
   },
+  reactCompiler: {
+    target: '19',
+  },
+  reactStrictMode: true,
   deployment: {
     /**
      * Enable auto-updates for studios.
      * Learn more at https://www.sanity.io/docs/cli#auto-updates
      */
     autoUpdates: true,
-  }
+  },
 })

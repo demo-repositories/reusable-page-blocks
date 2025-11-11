@@ -1,5 +1,5 @@
 import {defineType} from 'sanity'
-import { blockCopy } from './blockCopy'
+import {blockCopy} from './blockCopy'
 
 export default defineType({
   name: 'featuresGrid',
@@ -9,7 +9,7 @@ export default defineType({
     {
       name: 'title',
       title: 'Title',
-      type: 'string'
+      type: 'string',
     },
     {
       name: 'features',
@@ -23,36 +23,36 @@ export default defineType({
               name: 'title',
               title: 'Feature Title',
               type: 'string',
-              validation: Rule => Rule.required()
+              validation: (Rule) => Rule.required(),
             },
             {
               name: 'description',
               title: 'Description',
               type: 'text',
-              rows: 3
+              rows: 3,
             },
             {
               name: 'icon',
               title: 'Icon',
-              type: 'image'
-            }
-          ]
-        }
-      ]
+              type: 'image',
+            },
+          ],
+        },
+      ],
     },
     blockCopy,
   ],
   preview: {
     select: {
       title: 'title',
-      features: 'features'
+      features: 'features',
     },
     prepare(selection) {
       const count = selection.features ? selection.features.length : 0
       return {
         title: `Features: ${selection.title || 'No title'}`,
-        subtitle: `${count} feature${count !== 1 ? 's' : ''}`
+        subtitle: `${count} feature${count !== 1 ? 's' : ''}`,
       }
-    }
-  }
+    },
+  },
 })

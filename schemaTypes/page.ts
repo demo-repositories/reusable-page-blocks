@@ -10,7 +10,7 @@ export default defineType({
       name: 'title',
       title: 'Title',
       type: 'string',
-      validation: Rule => Rule.required()
+      validation: (Rule) => Rule.required(),
     },
     {
       name: 'slug',
@@ -20,7 +20,7 @@ export default defineType({
         source: 'title',
         maxLength: 96,
       },
-      validation: Rule => Rule.required()
+      validation: (Rule) => Rule.required(),
     },
     {
       name: 'content',
@@ -36,22 +36,22 @@ export default defineType({
         {
           type: 'reference',
           to: [{type: 'hero'}, {type: 'video'}, {type: 'carousel'}, {type: 'reusablePageBlock'}],
-          icon: IoExtensionPuzzle
-        }
-      ]
-    }
+          icon: IoExtensionPuzzle,
+        },
+      ],
+    },
   ],
   preview: {
     select: {
       title: 'title',
-      slug: 'slug'
+      slug: 'slug',
     },
     prepare(selection) {
       const {title, slug} = selection
       return {
         title,
-        subtitle: slug?.current ? `/${slug.current}` : 'No slug'
+        subtitle: slug?.current ? `/${slug.current}` : 'No slug',
       }
-    }
-  }
+    },
+  },
 })

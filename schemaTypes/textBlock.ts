@@ -1,5 +1,5 @@
 import {defineType} from 'sanity'
-import { blockCopy } from './blockCopy'
+import {blockCopy} from './blockCopy'
 
 export default defineType({
   name: 'textBlock',
@@ -9,24 +9,24 @@ export default defineType({
     {
       name: 'title',
       title: 'Title',
-      type: 'string'
+      type: 'string',
     },
     {
       name: 'content',
       title: 'Content',
       type: 'array',
-      of: [{type: 'block'}]
+      of: [{type: 'block'}],
     },
     blockCopy,
   ],
   preview: {
     select: {
-      title: 'title'
+      title: 'title',
     },
     prepare(selection) {
       return {
-        title: `Text: ${selection.title || 'No title'}`
+        title: `Text: ${selection.title || 'No title'}`,
       }
-    }
-  }
+    },
+  },
 })

@@ -1,5 +1,5 @@
 import {defineType} from 'sanity'
-import { blockCopy } from './blockCopy'
+import {blockCopy} from './blockCopy'
 
 export default defineType({
   name: 'imageBlock',
@@ -10,40 +10,40 @@ export default defineType({
       name: 'title',
       title: 'Title',
       type: 'string',
-      validation: Rule => Rule.required()
+      validation: (Rule) => Rule.required(),
     },
     {
       name: 'image',
       title: 'Image',
       type: 'image',
       options: {
-        hotspot: true
+        hotspot: true,
       },
-      validation: Rule => Rule.required()
+      validation: (Rule) => Rule.required(),
     },
     {
       name: 'alt',
       title: 'Alt Text',
       type: 'string',
-      validation: Rule => Rule.required()
+      validation: (Rule) => Rule.required(),
     },
     {
       name: 'caption',
       title: 'Caption',
-      type: 'string'
+      type: 'string',
     },
     blockCopy,
   ],
   preview: {
     select: {
       title: 'title',
-      media: 'image'
+      media: 'image',
     },
     prepare(selection) {
       return {
         title: `Image: ${selection.title}`,
-        media: selection.media
+        media: selection.media,
       }
-    }
-  }
+    },
+  },
 })
