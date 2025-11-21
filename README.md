@@ -15,9 +15,9 @@ This project shows how to build a modular content management system using Sanity
 
 ## Key Features
 
-### Block Copy Component
+### Reusable Block Transformation
 
-The `BlockCopy` component (`/components/BlockCopy.tsx`) provides a "Make Reusable" button within the Studio that allows editors to:
+This project uses an **input decoration** pattern to provide a "Make Reusable" banner within the Studio. This allows editors to:
 
 1. **Transform regular blocks into reusable blocks** - Click the button to convert any page block into a standalone reusable block document
 2. **Automatic replacement** - The original block is replaced with a reference to the new reusable block
@@ -32,15 +32,22 @@ This pattern is useful when you want to:
 
 ### How It Works
 
-When a user clicks "Make Reusable":
+**Input Decoration Pattern:**
 
-1. The component extracts the current block's data and title
-2. Creates a new `reusablePageBlock` document in Sanity
-3. Replaces the original block with a reference (preserving the `_key`)
-4. Updates the parent document with the new content array
+Instead of adding fields to your schema, this project uses a global input component that automatically decorates any object type marked with `options: { reusable: true }`.
+
+1. **Schema Configuration** - Add `options: { reusable: true }` to any object schema type (see `schemaTypes/ctaBlock.ts` as an example)
+2. **Global Registration** - The `ReusableBlockInput` component is registered globally in `sanity.config.ts` as a form input component
+3. **Automatic Detection** - The component checks each input to see if it has `options.reusable === true` and conditionally shows the transformation banner
+4. **TypeScript Support** - Uses declaration merging (`options.d.ts`) to make the `reusable` option type-safe
+
+**When a user clicks "Make Reusable":**
+
+1. The component creates a new `reusablePageBlock` document in Sanity
+2. Replaces the original block with a reference (preserving the `_key` for real-time safety)
+3. Updates the parent document through the form system
+4. Opens the newly created reusable block for editing
 5. Shows a success notification
-
-The key to making this work is preserving the original `_key` when creating the reference - this allows Sanity to track which block is being replaced without throwing errors.
 
 ## Installation
 
@@ -72,12 +79,16 @@ The Sanity Studio will be available at `http://localhost:3333`
 
 ```
 /components
-  └── BlockCopy.tsx          # Custom component for transforming blocks
+  ├── ReusableBlockInput.tsx   # Global input decorator that enables reusable blocks
+  └── ReusableBlockBanner.tsx  # UI component for transforming blocks
+/i18n
+  ├── index.ts                 # i18n configuration (best practice for Studio UI text)
+  └── resources.ts             # Translation strings for the reusable block UI
 /schemaTypes
-  ├── reusablePageBlock.ts   # Schema for reusable block documents
-  └── ...                    # Other schema definitions
-/utils                       # Utility functions and helpers
-sanity.config.ts             # Sanity Studio configuration
+  ├── reusablePageBlock.ts     # Schema for reusable block documents
+  └── ...                      # Other schema definitions
+options.d.ts                   # TypeScript declaration merging for reusable option
+sanity.config.ts               # Sanity Studio configuration
 ```
 
 ## Other Commands
@@ -87,25 +98,32 @@ sanity.config.ts             # Sanity Studio configuration
 
 ## Extending This Demo
 
-To add the BlockCopy component to your own fields:
+To make your own block types reusable, simply add the `reusable` option to your schema:
 
-1. Import the component in your schema:
+```typescript
+import {defineType} from 'sanity'
 
-   ```typescript
-   import {BlockCopy} from '../components/BlockCopy'
-   ```
+export default defineType({
+  name: 'myBlock',
+  title: 'My Block',
+  type: 'object',
+  options: {
+    reusable: true, // This enables the "Make Reusable" banner
+  },
+  fields: [
+    // your fields here
+  ],
+})
+```
 
-2. Add it to your field's `components` definition:
+That's it! The `ReusableBlockInput` component is already registered globally in `sanity.config.ts`, so any object type with `options.reusable === true` will automatically show the transformation banner.
 
-   ```typescript
-   {
-     name: 'content',
-     type: 'array',
-     of: [/* your block types */],
-     components: {
-       item: BlockCopy
-     }
-   }
-   ```
+**Requirements:**
 
-3. Ensure you have a `reusablePageBlock` schema defined in your project
+1. The global input component must be registered in `sanity.config.ts`
+2. You must have a `reusablePageBlock` schema defined in your project
+3. The TypeScript declaration file (`options.d.ts`) should be present for type safety
+
+**Note on i18n:**
+
+The i18n setup (`/i18n` folder and bundle registration in `sanity.config.ts`) is **best practice** for managing Studio UI text, especially if you plan to support multiple languages or share this feature as a plugin. However, it's not strictly required - you could hardcode the strings directly in the component if preferred. The i18n approach keeps all UI text centralized and makes future translations straightforward.
