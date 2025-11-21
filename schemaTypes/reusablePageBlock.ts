@@ -19,7 +19,7 @@
  */
 
 import {BiSolidExtension} from 'react-icons/bi'
-import {type SanityClient, defineType, useClient} from 'sanity'
+import {DEFAULT_STUDIO_CLIENT_OPTIONS, type SanityClient, defineType, useClient} from 'sanity'
 import useSWR from 'swr'
 import {PageBlockPreview} from '../components/PageBlockPreview'
 import {pluralize} from '../utils/pluralize'
@@ -42,7 +42,7 @@ export default defineType({
       // Why min(1).max(1)? We only want to store one block per reusable document
       name: 'content',
       type: 'array',
-      validation: (Rule) => Rule.required().min(1).max(1),
+      validation: (rule) => rule.required().min(1).max(1),
       of: [
         // List of all block types that can be made reusable
         {type: 'textBlock'},
@@ -88,7 +88,7 @@ export default defineType({
   components: {
     preview: function Preview(props) {
       const id = (props as any)?._id
-      const client = useClient()
+      const client = useClient(DEFAULT_STUDIO_CLIENT_OPTIONS)
       // Fetch count of pages that reference this block
       const count = useReferences(client, id)?.length
       let subtitle = props.subtitle

@@ -52,7 +52,7 @@ export default defineType({
           },
         },
       ],
-      validation: (Rule) => Rule.required().min(1),
+      validation: (rule) => rule.required().min(1),
     },
     {
       name: 'autoplay',
